@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Место вкуса</title>
+<meta name="description" content="Место вкуса: кофейня и кондитерская в Лангепасе, Ленина, 40. Десерты собственного производства, бенто-торты и торты на заказ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Marck+Script&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: dark patisserie vitrine. Sections are poured layers of a cake, joined by glaze drips. */
+:root {
+  --bg: #1d0b0f;          /* bitter cherry chocolate */
+  --layer: #2c1218;       /* ganache layer */
+  --layer-2: #3a1820;
+  --fg: #f7e7e3;          /* whipped cream with rose */
+  --muted: #c9aaa8;
+  --rose: #eaa6b3;        /* strawberry glaze */
+  --gold: #d2ac6e;        /* caramel gold */
+  --line: rgba(234,166,179,.22);
+  --on-rose: #2a0f15;
+  --font-display: "Yeseva One", "Playfair Display", Georgia, serif;
+  --font-hand: "Marck Script", "Segoe Script", cursive;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f9ece9; --layer: #f1dcd8; --layer-2: #ead0cb;
+    --fg: #2a1015; --muted: #6e4a4d; --rose: #9c2a42; --gold: #8a6326;
+    --line: rgba(122,31,48,.2); --on-rose: #fff4f2; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f9ece9; --layer: #f1dcd8; --layer-2: #ead0cb;
+  --fg: #2a1015; --muted: #6e4a4d; --rose: #9c2a42; --gold: #8a6326;
+  --line: rgba(122,31,48,.2); --on-rose: #fff4f2; color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: 1180px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+
+.eyebrow { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.05; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(36px, 6vw, 64px); }
+.hand { font-family: var(--font-hand); color: var(--rose); font-weight: 400; }
+
+/* Header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.logo { font-family: var(--font-display); font-size: 22px; text-decoration: none; letter-spacing: .02em; white-space: nowrap; }
+.logo span { color: var(--rose); }
+.nav { display: none; gap: 28px; font-size: 14px; font-weight: 500; }
+.nav a { text-decoration: none; color: var(--muted); transition: color .2s; }
+.nav a:hover { color: var(--fg); }
+@media (min-width: 900px) { .nav { display: flex; } }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font: 600 15px/1 var(--font-body); padding: 15px 24px; border-radius: 999px;
+  text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform .2s, background .2s, color .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-rose { background: var(--rose); color: var(--on-rose); }
+.btn-ghost { border-color: var(--line); color: var(--fg); background: transparent; }
+.btn-ghost:hover { border-color: var(--rose); }
+.btn-sm { padding: 11px 18px; font-size: 14px; }
+
+/* Hero */
+.hero { position: relative; padding-block: clamp(48px, 9vw, 120px) clamp(56px, 8vw, 96px); overflow: hidden; }
+.hero .wrap { display: grid; gap: 48px; align-items: center; }
+@media (min-width: 960px) { .hero .wrap { grid-template-columns: 1.35fr 1fr; } }
+.hero-copy { min-width: 0; }
+.hero h1 { font-size: clamp(52px, 10.5vw, 132px); line-height: .92; margin-top: 18px; }
+.hero h1 .hand { display: block; font-size: .62em; line-height: 1.1; margin-top: .12em; transform: rotate(-3deg); transform-origin: left; }
+.hero p.lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 34em; margin: 28px 0 36px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.seal { position: relative; width: min(420px, 100%); aspect-ratio: 1; margin-inline: auto; max-width: 100%; }
+.seal svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 40s linear infinite; }
+.seal svg.ring text { font: 600 13.5px var(--font-body); letter-spacing: .32em; text-transform: uppercase; fill: var(--gold); }
+.seal-core {
+  position: absolute; inset: 17%; border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--rose) 45%, transparent), transparent 55%),
+    radial-gradient(circle at 70% 75%, color-mix(in srgb, var(--gold) 30%, transparent), transparent 60%),
+    var(--layer-2);
+  display: grid; place-items: center; text-align: center;
+  box-shadow: inset 0 0 0 1px var(--line), 0 40px 80px -30px rgba(0,0,0,.55);
+}
+.seal-core b { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 9vw, 96px); line-height: 1; color: var(--fg); }
+.seal-core small { display: block; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Glaze drip */
+.drip { display: block; width: 100%; height: clamp(40px, 6vw, 80px); margin-bottom: -1px; }
+.drip path { transform-origin: top; animation: pour 1.6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes pour { from { transform: scaleY(.55); } to { transform: scaleY(1); } }
+
+/* Facts */
+.facts { background: var(--layer); }
+.facts .wrap { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 20px; padding-block: 8px 56px; }
+@media (min-width: 820px) { .facts .wrap { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+.fact { border-top: 1px solid var(--line); padding-top: 16px; }
+.fact b { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.fact span { color: var(--muted); font-size: 14px; }
+
+/* Vitrine */
+.section { padding-block: clamp(64px, 9vw, 120px); }
+.layer { background: var(--layer); }
+.section-head { display: grid; gap: 18px; margin-bottom: clamp(36px, 5vw, 64px); }
+@media (min-width: 900px) { .section-head { grid-template-columns: 1fr 1fr; align-items: end; } }
+.section-head p { color: var(--muted); max-width: 32em; margin: 0; }
+
+.vitrine { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.vitrine li {
+  display: grid; gap: 6px 32px; padding-block: 26px; border-bottom: 1px solid var(--line);
+  grid-template-columns: 1fr; position: relative;
+}
+@media (min-width: 820px) { .vitrine li { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) auto; align-items: baseline; } }
+.vitrine h3 { font-size: clamp(28px, 3.6vw, 42px); transition: color .25s, transform .35s; }
+.vitrine li:hover h3 { color: var(--rose); transform: translateX(8px); }
+.vitrine p { margin: 0; color: var(--muted); min-width: 0; }
+.tag { justify-self: start; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+
+/* Drinks */
+.drinks { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+.drink { background: var(--layer-2); border-radius: 22px; padding: 26px 24px 24px; display: grid; gap: 10px; align-content: start; }
+.drink .ico { width: 40px; height: 40px; color: var(--rose); }
+.drink h3 { font-size: 26px; }
+.drink p { margin: 0; color: var(--muted); font-size: 15px; }
+.drinks-note { margin-top: 28px; color: var(--muted); font-size: 15px; }
+.drinks-note b { color: var(--fg); font-weight: 600; }
+
+/* Order */
+.order-grid { display: grid; gap: clamp(36px, 5vw, 72px); }
+@media (min-width: 980px) { .order-grid { grid-template-columns: .9fr 1.1fr; } }
+.steps { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 22px; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; counter-increment: s; }
+.steps li::before { content: counter(s); font-family: var(--font-display); font-size: 26px; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); color: var(--rose); }
+.steps b { display: block; font-weight: 600; margin-top: 4px; }
+.steps span { color: var(--muted); font-size: 15px; }
+
+.form { background: var(--layer); border: 1px solid var(--line); border-radius: 28px; padding: clamp(22px, 4vw, 40px); display: grid; gap: 18px; min-width: 0; }
+.row { display: grid; gap: 18px; }
+@media (min-width: 620px) { .row.two { grid-template-columns: 1fr 1fr; } }
+label { display: grid; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); min-width: 0; }
+input, select, textarea {
+  font: 500 16px/1.4 var(--font-body); color: var(--fg); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 14px; padding: 13px 14px; width: 100%; min-width: 0;
+  text-transform: none; letter-spacing: normal;
+}
+textarea { resize: vertical; min-height: 92px; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--rose); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chips label { text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 500; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; cursor: pointer; display: inline-block; transition: background .2s, color .2s, border-color .2s; }
+.chips input:checked + label { background: var(--rose); color: var(--on-rose); border-color: var(--rose); }
+.chips input:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; min-width: 0; }
+legend { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 10px; }
+.preview { background: var(--bg); border-radius: 16px; padding: 16px 18px; font-size: 15px; white-space: pre-wrap; color: var(--fg); border: 1px dashed var(--line); min-height: 4em; overflow-wrap: anywhere; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.status { font-size: 14px; color: var(--gold); min-height: 1.4em; }
+
+/* Visit */
+.visit { display: grid; gap: 40px; }
+@media (min-width: 900px) { .visit { grid-template-columns: 1.2fr 1fr; align-items: start; } }
+.address { font-family: var(--font-display); font-size: clamp(40px, 6vw, 76px); line-height: 1; margin: 18px 0 14px; }
+.visit dl { display: grid; grid-template-columns: auto 1fr; gap: 14px 24px; margin: 0; }
+.visit dt { color: var(--muted); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; padding-top: 3px; }
+.visit dd { margin: 0; min-width: 0; }
+.phone { font-size: 22px; font-weight: 600; user-select: all; font-variant-numeric: tabular-nums; }
+.copy { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 999px; font: 500 13px var(--font-body); padding: 6px 12px; margin-left: 8px; cursor: pointer; vertical-align: middle; }
+.copy:hover { color: var(--fg); border-color: var(--rose); }
+.links { display: grid; gap: 12px; }
+.link-card { display: flex; justify-content: space-between; align-items: center; gap: 16px; text-decoration: none; padding: 20px 22px; border-radius: 18px; background: var(--layer-2); transition: transform .2s, background .2s; }
+.link-card:hover { transform: translateX(6px); }
+.link-card b { display: block; font-size: 18px; font-weight: 600; }
+.link-card span { color: var(--muted); font-size: 14px; }
+.link-card .arrow { font-size: 22px; color: var(--rose); }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
+footer .logo { font-size: 18px; color: var(--fg); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">Место <span>вкуса</span></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#desserts">Десерты</a>
+      <a href="#drinks">Напитки</a>
+      <a href="#order">Торт на заказ</a>
+      <a href="#visit">Как найти</a>
+    </nav>
+    <a class="btn btn-rose btn-sm" href="#order">Заказать торт</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">Кофейня · Лангепас · Ленина, 40</div>
+        <h1>Твоё место <span class="hand">для сладких встреч</span></h1>
+        <p class="lead">Свежий кофе и десерты, которые мы готовим сами: бенто-торты, меренговые рулеты, клубника в шоколаде и торты на заказ к любому поводу.</p>
+        <div class="hero-actions">
+          <a class="btn btn-rose" href="#order">Заказать торт</a>
+          <a class="btn btn-ghost" href="#desserts">Смотреть витрину</a>
+        </div>
+      </div>
+      <div class="seal" aria-hidden="true">
+        <svg class="ring" viewBox="0 0 400 400">
+          <defs><path id="circ" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+          <text><textPath href="#circ">десерты собственного производства · кофе с собой ·</textPath></text>
+        </svg>
+        <div class="seal-core"><div><b>Ленина 40</b><small>7-й микрорайон</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="drip" data-drip="1" data-fill="--bg" data-back="--layer" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <section class="facts" aria-label="Коротко о кофейне">
+    <div class="wrap">
+      <div class="fact"><b>≈ 400 ₽</b><span>средний чек</span></div>
+      <div class="fact"><b>10 мест</b><span>камерный зал на первом этаже</span></div>
+      <div class="fact"><b>15 000+</b><span>гостей следят за нами в Instagram</span></div>
+      <div class="fact"><b>Доставка</b><span>десерты и торты к вашей двери</span></div>
+    </div>
+  </section>
+
+  <svg class="drip" data-drip="2" data-fill="--layer" data-back="--bg" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <section class="section" id="desserts">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Витрина</div>
+          <h2>Сделано <span class="hand">своими руками</span></h2>
+        </div>
+        <p>Все десерты мы готовим на собственном производстве. Состав витрины меняется каждый день, поэтому о наличии лучше спросить заранее.</p>
+      </div>
+      <ul class="vitrine">
+        <li><h3>Бенто-торты</h3><p>Маленький торт на двоих в коробочке-ланчбоксе. Надпись и рисунок на ваш вкус.</p><span class="tag">на заказ</span></li>
+        <li><h3>Торты</h3><p>Праздничные торты на дни рождения, свадьбы и юбилеи. Начинку и оформление подбираем вместе.</p><span class="tag">на заказ</span></li>
+        <li><h3>Меренговые рулеты</h3><p>Хрустящая снаружи и нежная внутри меренга с кремом и ягодами.</p><span class="tag">к кофе</span></li>
+        <li><h3>Клубника в шоколаде</h3><p>Отборная клубника в бельгийском шоколаде. Красивый подарок без повода.</p><span class="tag">в подарок</span></li>
+        <li><h3>Корпусные десерты</h3><p>Муссовые пирожные с зеркальной глазурью и чётким срезом.</p><span class="tag">к кофе</span></li>
+        <li><h3>ПП-десерты</h3><p>Лёгкие десерты для тех, кто следит за питанием, но не готов отказаться от сладкого.</p><span class="tag">полегче</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <svg class="drip" data-drip="3" data-fill="--bg" data-back="--layer" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <section class="section layer" id="drinks">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Напитки</div>
+          <h2>К десерту <span class="hand">и в дорогу</span></h2>
+        </div>
+        <p>Всё можно взять с собой: забегайте по пути на работу или заказывайте вместе с десертами.</p>
+      </div>
+      <div class="drinks">
+        <article class="drink">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 16h20v8a9 9 0 0 1-9 9h-2a9 9 0 0 1-9-9z"/><path d="M28 18h3a3.5 3.5 0 0 1 0 7h-3.4"/><path d="M14 6c-1 2 1 3 0 5M20 6c-1 2 1 3 0 5"/></svg>
+          <h3>Кофе</h3><p>Классика эспрессо: капучино, латте, раф, американо.</p>
+        </article>
+        <article class="drink">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 12h20l-2.5 22h-15z"/><path d="M14 18h4v4h-4zM21 22h4v4h-4z"/><path d="M22 12l3-8"/></svg>
+          <h3>Айс-кофе</h3><p>Холодный кофе со льдом для жарких и не очень дней.</p>
+        </article>
+        <article class="drink">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 12h20l-2.5 22h-15z"/><circle cx="16" cy="29" r="1.6"/><circle cx="21" cy="30" r="1.6"/><circle cx="24" cy="27" r="1.6"/><path d="M21 12V3"/></svg>
+          <h3>Bubble Tea</h3><p>Чай с шариками тапиоки: сладкий, яркий и очень фотогеничный.</p>
+        </article>
+        <article class="drink">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 14h19v6a9.5 9.5 0 0 1-19 0z"/><path d="M28 16h2.5a3 3 0 0 1 0 6H27"/><path d="M6 34h25"/></svg>
+          <h3>Чай</h3><p>Чёрный, зелёный и травяные сборы, в чашке или с собой.</p>
+        </article>
+        <article class="drink">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 14h18l-2 20H13z"/><path d="M10 14c0-4 4-7 10-7s10 3 10 7"/><circle cx="20" cy="5" r="2"/></svg>
+          <h3>Молочные коктейли</h3><p>Густые коктейли на мороженом, как в детстве.</p>
+        </article>
+        <article class="drink">
+          <svg class="ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 10h18v20a4 4 0 0 1-4 4H15a4 4 0 0 1-4-4z"/><circle cx="24" cy="10" r="5"/><path d="M15 20h10"/></svg>
+          <h3>Лимонады</h3><p>Освежающие домашние лимонады на ягодах и цитрусах.</p>
+        </article>
+      </div>
+      <p class="drinks-note"><b>Оплата:</b> картой, наличными или по QR-коду.</p>
+    </div>
+  </section>
+
+  <svg class="drip" data-drip="4" data-fill="--layer" data-back="--bg" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <section class="section" id="order">
+    <div class="wrap order-grid">
+      <div>
+        <div class="eyebrow">Торты на заказ</div>
+        <h2>Торт, о котором <span class="hand">будут говорить</span></h2>
+        <ol class="steps">
+          <li><div><b>Соберите заявку</b><span>Повод, дата, формат и пожелания к оформлению. Это займёт минуту.</span></div></li>
+          <li><div><b>Отправьте нам в Telegram</b><span>Кнопка скопирует текст заявки, останется вставить его в чат.</span></div></li>
+          <li><div><b>Согласуем детали</b><span>Подберём начинку, вес и дизайн, назовём стоимость и срок.</span></div></li>
+          <li><div><b>Заберите или закажите доставку</b><span>Торт будет готов к нужному дню на Ленина, 40.</span></div></li>
+        </ol>
+      </div>
+
+      <form class="form" id="orderForm" novalidate>
+        <fieldset>
+          <legend>Что заказываем</legend>
+          <div class="chips">
+            <input type="radio" name="kind" id="k1" value="Бенто-торт" checked><label for="k1">Бенто-торт</label>
+            <input type="radio" name="kind" id="k2" value="Торт" ><label for="k2">Торт</label>
+            <input type="radio" name="kind" id="k3" value="Клубника в шоколаде"><label for="k3">Клубника в шоколаде</label>
+            <input type="radio" name="kind" id="k4" value="Набор десертов"><label for="k4">Набор десертов</label>
+          </div>
+        </fieldset>
+        <div class="row two">
+          <label for="occasion">Повод
+            <select id="occasion">
+              <option>День рождения</option>
+              <option>Свадьба</option>
+              <option>Юбилей</option>
+              <option>Гендер-пати</option>
+              <option>Выписка из роддома</option>
+              <option>Корпоратив</option>
+              <option>Просто так</option>
+            </select>
+          </label>
+          <label for="date">Дата
+            <input type="date" id="date">
+          </label>
+        </div>
+        <div class="row two">
+          <label for="guests">Сколько гостей
+            <input type="number" id="guests" min="1" max="200" placeholder="например, 8" inputmode="numeric">
+          </label>
+          <label for="name">Ваше имя
+            <input type="text" id="name" autocomplete="given-name" placeholder="Как к вам обращаться">
+          </label>
+        </div>
+        <label for="wish">Пожелания к вкусу и оформлению
+          <textarea id="wish" placeholder="Начинка, цвета, надпись, фото-референс из Instagram"></textarea>
+        </label>
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Текст заявки</div>
+          <div class="preview" id="preview" aria-live="polite"></div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-rose" id="copyBtn">Скопировать заявку</button>
+          <a class="btn btn-ghost" href="https://t.me/mesto_vkusa_Langepas" target="_blank" rel="noopener">Открыть Telegram</a>
+        </div>
+        <div class="status" id="status" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <svg class="drip" data-drip="5" data-fill="--bg" data-back="--layer" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <section class="section layer" id="visit">
+    <div class="wrap visit">
+      <div>
+        <div class="eyebrow">Как нас найти</div>
+        <p class="address">Ленина, 40</p>
+        <p style="color:var(--muted);margin:0 0 32px">7-й микрорайон, первый этаж. Лангепас, ХМАО — Югра.</p>
+        <dl>
+          <dt>Телефон</dt>
+          <dd><span class="phone" id="phone">+7 922 903-86-86</span><button class="copy" type="button" data-copy="+79229038686">Копировать</button></dd>
+          <dt>Оплата</dt>
+          <dd>Карта, наличные, QR-код</dd>
+          <dt>Режим</dt>
+          <dd>Часы работы уточняйте по телефону или в Telegram</dd>
+        </dl>
+      </div>
+      <div class="links">
+        <a class="link-card" href="https://www.instagram.com/mesto_vkusa_langepas/" target="_blank" rel="noopener"><div><b>Instagram</b><span>@mesto_vkusa_langepas · новинки витрины</span></div><span class="arrow">→</span></a>
+        <a class="link-card" href="https://t.me/mesto_vkusa_Langepas" target="_blank" rel="noopener"><div><b>Telegram</b><span>@mesto_vkusa_Langepas · заказы и вопросы</span></div><span class="arrow">→</span></a>
+        <a class="link-card" href="https://2gis.ru/langepas/firm/70000001118560859" target="_blank" rel="noopener"><div><b>2ГИС</b><span>Маршрут и вход в здание</span></div><span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">Место <span style="color:var(--rose)">вкуса</span></span>
+    <span>Кофейня и кондитерская · Лангепас, Ленина, 40</span>
+    <span>Десерты собственного производства</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Glaze drips: a deterministic pseudo-random drip edge per separator.
+  function rng(seed) { let s = seed * 9301 + 49297; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+  document.querySelectorAll('svg.drip').forEach(function (svg) {
+    var r = rng(Number(svg.dataset.drip) * 7 + 3);
+    var W = 1200, base = 14, x = W, d = 'M0 0 H' + W + ' V' + base;
+    while (x > 0) {
+      var gap = 40 + r() * 90; x -= gap;
+      if (x <= 30) break;
+      var rad = 7 + r() * 9, len = 18 + r() * 52, cx = x;
+      d += ' L' + (cx + rad + 10).toFixed(1) + ' ' + base;
+      d += ' C' + (cx + rad).toFixed(1) + ' ' + base + ' ' + (cx + rad).toFixed(1) + ' ' + (base + 6) + ' ' + (cx + rad).toFixed(1) + ' ' + (base + len - rad).toFixed(1);
+      d += ' A' + rad.toFixed(1) + ' ' + rad.toFixed(1) + ' 0 0 1 ' + (cx - rad).toFixed(1) + ' ' + (base + len - rad).toFixed(1);
+      d += ' C' + (cx - rad).toFixed(1) + ' ' + (base + 6) + ' ' + (cx - rad).toFixed(1) + ' ' + base + ' ' + (cx - rad - 10).toFixed(1) + ' ' + base;
+      x = cx - rad - 10;
+    }
+    d += ' L0 ' + base + ' Z';
+    svg.style.background = 'var(' + svg.dataset.back + ')';
+    svg.innerHTML = '<path d="' + d + '" fill="var(' + svg.dataset.fill + ')"/>';
+  });
+
+  // Order form: builds a ready-to-send message.
+  var form = document.getElementById('orderForm');
+  var preview = document.getElementById('preview');
+  var status = document.getElementById('status');
+  var date = document.getElementById('date');
+  var t = new Date(); t.setDate(t.getDate() + 3);
+  date.min = new Date().toISOString().slice(0, 10);
+  if (!date.value) date.value = t.toISOString().slice(0, 10);
+
+  function fmtDate(v) {
+    if (!v) return 'уточню';
+    var p = v.split('-');
+    var m = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    return Number(p[2]) + ' ' + m[Number(p[1]) - 1];
+  }
+  function build() {
+    var kind = (form.querySelector('input[name="kind"]:checked') || {}).value || '';
+    var g = document.getElementById('guests').value.trim();
+    var n = document.getElementById('name').value.trim();
+    var w = document.getElementById('wish').value.trim();
+    var lines = [
+      'Здравствуйте! Хочу заказать: ' + kind + '.',
+      'Повод: ' + document.getElementById('occasion').value + '.',
+      'Дата: ' + fmtDate(date.value) + '.'
+    ];
+    if (g) lines.push('Гостей: ' + g + '.');
+    if (w) lines.push('Пожелания: ' + w);
+    if (n) lines.push('Меня зовут ' + n + '.');
+    return lines.join('\n');
+  }
+  function render() { preview.textContent = build(); }
+  form.addEventListener('input', render);
+  form.addEventListener('change', render);
+  render();
+
+  function copyText(text, el) {
+    function fallback() {
+      var range = document.createRange(); range.selectNodeContents(el);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      status.textContent = 'Текст выделен: скопируйте его вручную и вставьте в Telegram.';
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        status.textContent = 'Заявка скопирована. Откройте Telegram и вставьте её в чат.';
+      }, fallback);
+    } else { fallback(); }
+  }
+  form.addEventListener('submit', function (e) { e.preventDefault(); copyText(build(), preview); });
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var done = function () { b.textContent = 'Скопировано'; setTimeout(function () { b.textContent = 'Копировать'; }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(b.dataset.copy).then(done, function () {
+          var r = document.createRange(); r.selectNodeContents(document.getElementById('phone'));
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
