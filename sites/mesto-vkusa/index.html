@@ -184,17 +184,7 @@ body.lights-off .hero h1 .script { animation: none; opacity: .12; text-shadow: n
   padding-right: .6em;
 }
 .marquee span i { font-style: normal; color: var(--neon); -webkit-text-stroke: 0; padding-left: .6em; }
-.marquee-toggle { position: absolute; inset: 0; z-index: 2; width: 100%; background: transparent; border: 0; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.marquee-toggle:focus-visible { outline: 2px solid var(--neon); outline-offset: -4px; }
-.marquee-state {
-  position: absolute; z-index: 3; top: 50%; left: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%;
-  display: grid; place-items: center; pointer-events: none; color: var(--wall); background: var(--neon-hot);
-  opacity: 0; transform: scale(.7); transition: opacity .35s var(--ease-out), transform .35s var(--ease-out);
-}
-.marquee-state svg { width: 22px; height: 22px; }
-.marquee-state.show { opacity: .92; transform: scale(1); }
-.marquee-state .i-play, .marquee.paused .marquee-state .i-pause { display: none; }
-.marquee.paused .marquee-state .i-play { display: block; }
+
 
 /* Light switch: the sign is a switch */
 .sign-switch { all: unset; display: block; width: 100%; cursor: pointer; border-radius: 18px; -webkit-tap-highlight-color: transparent; }
@@ -305,14 +295,6 @@ body.lights-off .marquee::before, body.lights-off .marquee::after { opacity: .15
 .empty { padding: 32px 0; color: var(--muted); }
 .board-note { margin: 24px 0 0; color: var(--muted); font-size: 15px; max-width: 60ch; }
 .board-note b { color: var(--text); font-weight: 600; }
-
-/* «Почему к нам»: four truths on the wall, separated by thin tube rails */
-.why { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 56px; }
-@media (min-width: 760px) { .why { grid-template-columns: 1fr 1fr; } }
-.why li { padding-block: 28px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 20px; align-content: start; }
-.why svg { grid-row: span 2; width: 52px; height: 52px; color: var(--neon); }
-.why h3 { font-size: clamp(24px, 2.6vw, 30px); line-height: 1.15; text-transform: uppercase; letter-spacing: .03em; }
-.why p { margin: 6px 0 0; color: var(--muted); max-width: 44ch; }
 
 /* FAQ */
 .faq-wrap { display: grid; gap: clamp(28px, 4vw, 56px); }
@@ -517,44 +499,11 @@ footer { border-top: 1px solid var(--line); }
   </section>
 
   <div class="marquee" id="marquee" aria-label="Кофе, десерты, выпечка, торты на заказ, Bubble Tea">
-    <button type="button" class="marquee-toggle" id="marqueeToggle" aria-pressed="false" aria-label="Остановить бегущую строку"></button>
-    <span class="marquee-state" id="marqueeState" aria-hidden="true"><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10-6.5a1 1 0 0 0 0-1.72l-10-6.5A1 1 0 0 0 8 5.5Z"/></svg></span>
     <div class="marquee-track" aria-hidden="true">
       <span>Кофе<i>•</i></span><span>Десерты<i>•</i></span><span>Выпечка<i>•</i></span><span>Торты на заказ<i>•</i></span><span>Bubble Tea<i>•</i></span><span>Клубника в шоколаде<i>•</i></span>
       <span>Кофе<i>•</i></span><span>Десерты<i>•</i></span><span>Выпечка<i>•</i></span><span>Торты на заказ<i>•</i></span><span>Bubble Tea<i>•</i></span><span>Клубника в шоколаде<i>•</i></span>
     </div>
   </div>
-
-  <section class="section" id="why">
-    <div class="wrap">
-      <div class="head">
-        <h2 class="tube-title" data-text="Почему к нам">Почему к нам</h2>
-        <p class="lead reveal">Маленькая кофейня на десять мест, где всё сладкое делают здесь же, на своём производстве.</p>
-      </div>
-      <ul class="why reveal">
-        <li>
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 38h30M12 38V24h24v14M12 30h24"/><path d="M16 24v-5h16v5M24 19v-5"/><path d="M24 8.5c1.6 1.2 1.6 2.8 0 4-1.6-1.2-1.6-2.8 0-4Z"/></svg>
-          <h3>Своё производство</h3>
-          <p>Все десерты готовим сами. Витрина меняется каждый день, так что всегда есть что попробовать впервые.</p>
-        </li>
-        <li>
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 40c-8-5-14-10.5-14-17.5A7.5 7.5 0 0 1 24 18a7.5 7.5 0 0 1 14 4.5C38 29.5 32 35 24 40Z"/><path d="M19 23c.8-1.6 2.2-2.4 4-2.4"/></svg>
-          <h3>Торт к вашему поводу</h3>
-          <p>Бенто, праздничные торты, клубника в шоколаде. Надпись и оформление делаем по вашему желанию.</p>
-        </li>
-        <li>
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 16h20l-2.4 24H16.4z"/><path d="M12 16h24M18 16l1-5h10l1 5"/><path d="M15.4 26h17.2"/></svg>
-          <h3>Кофе с собой</h3>
-          <p>Кофе, айс-кофе, Bubble Tea, лимонады и молочные коктейли можно забрать по пути.</p>
-        </li>
-        <li>
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 31V15h22v16M28 21h8l6 6v4h-14"/><circle cx="14" cy="34" r="3.5"/><circle cx="35" cy="34" r="3.5"/><path d="M17.5 34h14"/></svg>
-          <h3>Доставка</h3>
-          <p>Привезём десерты и торты. Стоимость и время доставки подскажем по телефону.</p>
-        </li>
-      </ul>
-    </div>
-  </section>
 
   <section class="section band" id="menu">
     <div class="wrap">
@@ -941,8 +890,8 @@ footer { border-top: 1px solid var(--line); }
   });
 
   /* ---------- Marquee pause ---------- */
-  var mq = document.getElementById('marquee'), mqBtn = document.getElementById('marqueeToggle'), mqState = document.getElementById('marqueeState');
-  var track = mq.querySelector('.marquee-track'), mx = 0, mv = 0, mTarget = reduce ? 0 : 1, half = 0, mLast = 0, mOn = false, mVisible = true, mStateT = 0;
+  var mq = document.getElementById('marquee');
+  var track = mq.querySelector('.marquee-track'), mx = 0, mv = 0, mTarget = reduce ? 0 : 1, half = 0, mLast = 0, mOn = false, mVisible = true;
   var pxr = window.devicePixelRatio || 1;
   var speed = function () { return window.innerWidth < 760 ? 42 : 60; };
   var measure = function () { half = track.scrollWidth / 2; };
@@ -963,14 +912,7 @@ footer { border-top: 1px solid var(--line); }
   }
   document.addEventListener('visibilitychange', function () { if (!document.hidden) mStart(); });
   mStart();
-  mqBtn.addEventListener('click', function () {
-    var paused = mq.classList.toggle('paused');
-    mTarget = paused || reduce ? 0 : 1;
-    mqBtn.setAttribute('aria-pressed', String(paused));
-    mqBtn.setAttribute('aria-label', paused ? 'Запустить бегущую строку' : 'Остановить бегущую строку');
-    mqState.classList.add('show'); clearTimeout(mStateT); mStateT = setTimeout(function () { mqState.classList.remove('show'); }, 900);
-    mStart();
-  });
+
 
   /* ---------- The light switch: the sign turns the room off and on, with a neon buzz ---------- */
   var sw = document.getElementById('signSwitch'), hint = document.getElementById('signHint'), ac = null;
